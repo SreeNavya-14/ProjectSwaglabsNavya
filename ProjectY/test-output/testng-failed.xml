@@ -6,10 +6,12 @@
     <classes>
       <class name="producttest.Example1Test">
         <methods>
-          <include name="orderProducts" invocation-numbers="0"/>
+          <include name="orderProducts"/>
           <include name="Logout"/>
-          <include name="LogIn"/>
           <include name="browserSetup"/>
+          <include name="LogIn"/>
+          <include name="ReportTerminate"/>
+          <include name="ReportSetup"/>
           <include name="broserTerminate"/>
         </methods>
       </class> <!-- producttest.Example1Test -->

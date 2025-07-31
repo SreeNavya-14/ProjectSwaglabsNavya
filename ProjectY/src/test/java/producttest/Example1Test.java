@@ -8,6 +8,9 @@ import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
 import genericLibrary.BaseConfig;
 import pagerepository.CartPage;
 import pagerepository.CheckoutOverviewPage;
@@ -19,7 +22,15 @@ public class Example1Test extends BaseConfig {
 
 	@Test(groups="RT",priority = 1, invocationCount = 1,enabled = true,dataProvider ="CheckoutInfo" )
 	public void orderProducts(String FirstName,String LastName,String ZipCode) {
+		//Create the Test Information
+		  test = report.createTest("Regresstiontest");
+		 //Steps Information
+		 test.log(Status.INFO, "Step1: launching The Browser Sucessful");
+		 test.log(Status.INFO, "Step2: Navigating To Application via URL Sucessful");
+		 test.log(Status.PASS, "Step3: Verified the WebPage Sucessful");
 		
+		 test.log(Status.SKIP, "Step5: Element is Hidden");
+		 Reporter.log("Sree",true);
 		Reporter.log(FirstName,true);
 		Reporter.log(LastName,true);
 		Reporter.log(ZipCode,true);
@@ -39,6 +50,12 @@ public class Example1Test extends BaseConfig {
 		hpobj.getfourthproduct().click();
 		// Verify Add To Cart button is Displayed & is Enabled
 		Assert.assertTrue(hpobj.getaddtocartbtn4().isDisplayed() && hpobj.getaddtocartbtn4().isEnabled());
+		 if(hpobj.getfourthproduct().isDisplayed()) {
+			 test.log(Status.PASS, "Step4: Verified the WebElement Displayed");
+		 }
+		 else{
+			 test.log(Status.FAIL, "Step4: Verified the WebElement is Not Displayed");
+		 }
 		// Click on Add To Cart button
 		hpobj.getaddtocartbtn4().click();
 		// Verify Back To Products link is Displayed & is Enabled
@@ -122,7 +139,26 @@ public class Example1Test extends BaseConfig {
 		ckovobj.getfinishbtn().click();
 		
 		//Assert.fail();
-
+		
+		}
+	
+	@Test
+	public void orderProducts_1(){
+		//Create the Test Information
+		  test = report.createTest("Regresstiontest");
+		 //Steps Information
+		 test.log(Status.INFO, "Step1: launching The Browser Sucessful");
+		
+		
+	}
+	@Test
+	public void orderProducts_2(){
+		//Create the Test Information
+		  test = report.createTest("Regresstiontest");
+		 //Steps Information
+		 test.log(Status.INFO, "Step1: launching The Browser Sucessful");
+		
+		
 	}
 
 }

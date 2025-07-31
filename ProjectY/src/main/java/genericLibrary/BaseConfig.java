@@ -12,10 +12,17 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import pagerepository.CheckoutCompletePage;
 import pagerepository.LoginPage;
@@ -32,6 +39,49 @@ public class BaseConfig {
 	public String FirstName;
 	public String LastName;
 	public String ZipCode;
+	 public ExtentReports report;
+	public ExtentSparkReporter spark;
+	public ExtentTest test;
+	
+	@BeforeTest
+	public void ReportSetup() {
+		//Create the SparkReport
+		 spark = new ExtentSparkReporter("./AdvanceReports/report.html");
+		// Configure the SparkReport Information
+		spark.config().setDocumentTitle("Regresstion testing for the SwagLabs");
+		spark.config().setReportName("RegresstionSuite");
+		spark.config().setTheme(Theme.DARK);
+		
+		//Create Extent Report
+		 report = new ExtentReports();
+		 // Attach the Spark Report and ExtentReport
+		 report.attachReporter(spark);
+		 //Configure the System Information in Extent Report
+		 report.setSystemInfo("DeviceName:", "Sree");
+		 report.setSystemInfo("OperatingSystem:", "WINDOWS ");
+		 report.setSystemInfo("Browser:", "Chrome");
+		 report.setSystemInfo("BrowserVersion:", "chrome-138.0.7204.169");
+	}
+	
+	@AfterTest
+	public void ReportTerminate() {
+		
+		 //Flush the Re[port
+		 report.flush();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
     @Parameters("BrowserName")
 	@BeforeClass
